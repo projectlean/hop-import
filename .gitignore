@@ -1,0 +1,6 @@
+.idea/
+plugins/
+metadata/
+target/
+
+*.iml
