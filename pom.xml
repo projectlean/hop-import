@@ -17,23 +17,104 @@
                     <target>8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.10</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/lib</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                            <excludeScope>test</excludeScope>
+                            <excludeScope>system</excludeScope>
+                            <excludeScope>runtime</excludeScope>
+                            <excludeScope>compile</excludeScope>
+                            <excludeScope>provided</excludeScope>
+                            <includeArtifactIds>commons-collections4,commons-lang3</includeArtifactIds>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <!-- here the phase you need -->
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jboss.jandex</groupId>
+                <artifactId>jandex-maven-plugin</artifactId>
+                <version>1.0.8</version>
+                <executions>
+                    <execution>
+                        <id>make-index</id>
+                        <goals>
+                            <goal>jandex</goal>
+                        </goals>
+                        <!-- phase is 'process-classes by default' -->
+                        <configuration>
+                            <!-- Nothing needed here for simple cases -->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
+        <!-- TEMPORARY -->
         <dependency>
-            <groupId>org.hop</groupId>
+            <groupId>org.apache.hop</groupId>
+            <artifactId>hop-ui-swt</artifactId>
+            <version>0.50-SNAPSHOT</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/xmlgraphics-commons -->
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>xmlgraphics-commons</artifactId>
+            <version>1.5</version>
+        </dependency>
+        <!-- END TEMPORARY -->
+
+
+        <dependency>
+            <groupId>org.apache.hop</groupId>
             <artifactId>hop-engine</artifactId>
-            <version>0.40-SNAPSHOT</version>
+            <version>0.50-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>org.hop</groupId>
+            <groupId>org.apache.hop</groupId>
             <artifactId>hop-plugins-misc-projects</artifactId>
-            <version>0.40-SNAPSHOT</version>
+            <version>0.50-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>org.hop</groupId>
+            <groupId>org.apache.hop</groupId>
             <artifactId>hop-databases-postgresql</artifactId>
-            <version>0.40-SNAPSHOT</version>
+            <version>0.50-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>

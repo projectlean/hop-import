@@ -1,8 +1,6 @@
 package org.apache.hop.imports.kettle;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -24,7 +22,7 @@ public class KettleConst {
             {"job_version", "workflow_version"},
             {"entries","actions"},
             {"entry","action"},
-            {"job-log-table","workflow-log-table"},
+//            {"job-log-table","workflow-log-table"},
             {"source_step", "source_transform"},
             {"target_step", "target_transform"}
     }).collect(Collectors.toMap(data -> (String)data[0], data -> (String)data[1]));
@@ -47,7 +45,14 @@ public class KettleConst {
             {"log", ""},
             {"connection", "pipeline"},
             {"slave-step-copy-partition-distribution", ""},
-            {"slave_transformation", ""}
+            {"slave_transformation", ""},
+            {"trans_object_id", ""},
+            {"job_object_id", ""},
+            {"specification_method", ""},
+            {"job-log-table", ""},
+            {"jobentry-log-table", ""},
+            {"channel-log-table", ""},
+            {"checkpoint-log-table", ""}
     }).collect(Collectors.toMap(data -> (String)data[0], data -> (String)data[1]));
 
     public static final Map<String, String> kettleReplaceContent = Stream.of(new Object[][]{
@@ -68,7 +73,14 @@ public class KettleConst {
 
     public static final HashMap<String, String> replacements = new HashMap<String, String>();
 
+    public static final List<String> repositoryTypes = Arrays.asList(new String[]{"JOB", "TRANS"});
+
+    public static final List<String> jobTypes = Arrays.asList(new String[]{"JOB"});
+
+    public static final List<String> transTypes = Arrays.asList(new String[]{"TRANS"});
+
     public KettleConst(){
+/*
         HashMap<String, String> kettleElementReplacements = new HashMap<String, String>();
         // ktr elements
         replacements.put("transformation", "pipeline");
@@ -82,5 +94,6 @@ public class KettleConst {
         replacements.put("entries", "actions");
         replacements.put("entry", "action");
         replacements.put("job-log-table", "workflow-log-table");
+*/
     }
 }
